@@ -1,4 +1,4 @@
-A work in progress python project.
+# A work in progress python web scraper.
 
 This web scraper goes to a specified page on Unsplash and find the download links for individual photos. It then stores the links in a list, iterates over them and downloads the image file at end of each url.
 
