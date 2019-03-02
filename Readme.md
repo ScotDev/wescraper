@@ -12,6 +12,6 @@ Planned updates, alterations and improvements:
 in order to improve upload/download speeds and to conserve space
 -Styling the email template
 -Having the output directory for the scraped files auto-clearing once the script is succesfully run
-in order ot prevent duplication of files and to stop accumulation of previously downloaded files
+in order to prevent duplication of files and to stop accumulation of previously downloaded files
 -General refactoring and restructuring of the code
 -Scheduling the script to run at a set interval (i.e. once per week)
