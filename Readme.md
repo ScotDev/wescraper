@@ -10,8 +10,12 @@ Planned updates, alterations and improvements:
 
 -Compressing the downloaded image files into a .zip and uploading the compressed folder to WeTransfer
 in order to improve upload/download speeds and to conserve space
+
 -Styling the email template
+
 -Having the output directory for the scraped files auto-clearing once the script is succesfully run
 in order to prevent duplication of files and to stop accumulation of previously downloaded files
+
 -General refactoring and restructuring of the code
+
 -Scheduling the script to run at a set interval (i.e. once per week)

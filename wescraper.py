@@ -70,7 +70,7 @@ Subject: SMTP e-mail test
 """
 
 # defines function to upload file to wetransfer then send email
-# from template containing wetrasnfer link
+# from template containing wetransfer link
 def upload_wetran():
         print("wetransfer function called")
         # upload_link = x.upload_file(file1, "test")
