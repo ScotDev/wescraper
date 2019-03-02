@@ -19,3 +19,5 @@ in order to prevent duplication of files and to stop accumulation of previously 
 -General refactoring and restructuring of the code
 
 -Scheduling the script to run at a set interval (i.e. once per week)
+
+-Adding a requirements.txt file for easier install of required libraries
