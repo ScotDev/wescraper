@@ -29,7 +29,8 @@ MIME-Version: 1.0
 Content-type: text/html
 Subject: SMTP e-mail test
 
-<h2 style="color: #4e84db>This is a test e-mail message</h2>.
+<h2 style="color: #431060">This is a test e-mail message</h2>
+
 """
 # deletes existing files in out directory
 def clear_directory():
