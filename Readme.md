@@ -1,12 +1,12 @@
 # A work in progress python web scraper.
 
-This web scraper goes to a specified page on Unsplash and find the download links for individual photos. It then stores the links in a list, iterates over them and downloads the image file at end of each url.
+## This web scraper goes to a specified page on Unsplash and find the download links for individual photos. It then stores the links in a list, iterates over them and downloads the image file at end of each url.
 
-It then uploads the files to WeTransfer via their API and inserts the WeTransfer download link into a preset email template.
+## It then uploads the files to WeTransfer via their API and inserts the WeTransfer download link into a preset email template.
 
-The script then sends this email with the download link to a predetermined recipient.
+## The script then sends this email with the download link to a predetermined recipient.
 
-Planned updates, alterations and improvements:
+### Planned updates, alterations and improvements:
 
 -Further styling the email template
 
