@@ -1,9 +1,6 @@
 from bs4 import BeautifulSoup
-import requests
+import requests, smtplib, shutil, os, glob
 import wget
-import smtplib
-import shutil
-import time
 from py3wetransfer import Py3WeTransfer
 
 # WeTransfer API
@@ -34,6 +31,14 @@ Subject: SMTP e-mail test
 
 <h2 style="color: #4e84db>This is a test e-mail message</h2>.
 """
+# deletes existing files in out directory
+def clear_directory():
+    filelistjpg=glob.glob("C:/Users/Callum/Documents/project_folder/*.jpg")
+    filelistzip=glob.glob("C:/Users/Callum/Documents/project_folder/*.zip")
+    for file in filelistjpg:
+        os.remove(file)
+    for file in filelistzip:
+        os.remove(file)
 
 # starts connect without outgoing email server
 def email_connection():
@@ -51,6 +56,7 @@ def scrape():
 # downloads images from urls in list_of_urls then
 # clears list contents
 def download():
+    print("Download started")
     for x in list_of_urls:
         wget.download(x, out=output_directory)
     print("Download complete")
@@ -66,12 +72,13 @@ def compress_downloads():
 # from template containing wetransfer link
 def upload_wetran():
     print("WeTransfer function called")
-    upload_link = x.upload_file("C:/Users/Callum/Desktop/test/downloads.zip", "test")
+    upload_link = x.upload_file("C:/Users/Callum/Documents/project_folder/downloads.zip", "test")
     print("WeTransfer complete")
     conn.sendmail('example@gmail.com', 'example@live.co.uk', message + str(upload_link))
     print(upload_link)
     conn.quit()
 
+clear_directory()
 email_connection()
 scrape()
 download()

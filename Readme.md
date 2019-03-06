@@ -6,6 +6,7 @@
 
 ### The script then sends this email with the download link to a predetermined recipient.
 
+
 Planned updates, alterations and improvements:
 
 -Further styling the email template
