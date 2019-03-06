@@ -29,7 +29,8 @@ MIME-Version: 1.0
 Content-type: text/html
 Subject: SMTP e-mail test
 
-<h2 style="color: #4e84db>This is a test e-mail message</h2>.
+<h2 style="color: #431060">This is a test e-mail message</h2>
+
 """
 # deletes existing files in out directory
 def clear_directory():
@@ -71,7 +72,7 @@ def compress_downloads():
 # uploads file to wetransfer then send email
 # from template containing wetransfer link
 def upload_wetran():
-    print("WeTransfer function called")
+    print("WeTransfer upload started")
     upload_link = x.upload_file("C:/Users/Callum/Documents/project_folder/downloads.zip", "test")
     print("WeTransfer complete")
     conn.sendmail('example@gmail.com', 'example@live.co.uk', message + str(upload_link))
