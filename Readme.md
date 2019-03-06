@@ -8,16 +8,21 @@ The script then sends this email with the download link to a predetermined recip
 
 Planned updates, alterations and improvements:
 
--Compressing the downloaded image files into a .zip and uploading the compressed folder to WeTransfer
-in order to improve upload/download speeds and to conserve space
+-Further styling the email template
 
--Styling the email template
+-Adding environmental variable to allow for a more typical looking python script
+as commonly appears on github
 
 -Having the output directory for the scraped files auto-clearing once the script is succesfully run
 in order to prevent duplication of files and to stop accumulation of previously downloaded files
 
--General refactoring and restructuring of the code
+-General refactoring and restructuring of the code to resemble a typical python file
 
 -Scheduling the script to run at a set interval (i.e. once per week)
 
 -Adding a requirements.txt file for easier install of required libraries
+
+-Flask integration, making the script callable from a webpage
+
+-As part this script's functionality within this webpage, using a dropdown list
+of options to select which category of Unsplash wallpapers to download

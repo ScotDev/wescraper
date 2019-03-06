@@ -2,25 +2,12 @@ from bs4 import BeautifulSoup
 import requests
 import wget
 import smtplib
-import os
+import shutil
 import time
 from py3wetransfer import Py3WeTransfer
 
-# deletes any existing files in output directory
-path = "c:/Users/Callum/Documents/project_folder"
-for filename in os.listdir(path):
-    if filename.endswith(''):
-        # os.unlink(filename)
-        print(filename)
-
-# connect to sending email server
-conn = smtplib.SMTP('smtp.gmail.com', 587)
-conn.ehlo()
-conn.starttls()
-conn.login('example@gmail.com', 'password')
-
 # WeTransfer API
-x = Py3WeTransfer("api-key")
+x = Py3WeTransfer("you-api-key-here")
 
 # Sets webpage to be scraped
 r  = requests.get("https://unsplash.com/wallpaper/1065412/iphone-wallpapers")
@@ -32,56 +19,62 @@ soup = BeautifulSoup(data)
 # creates empty list to be filled with scraped urls
 list_of_urls = []
 
-file1 = []
-
+# sets the output directory for downloaded images
 output_directory = "C:/Users/Callum/Documents/project_folder"
 
-for link in soup.find_all('a', attrs={'title': 'Download photo'}):
-    list_of_urls.append(link.get('href'))
-
-print(list_of_urls)
-
-for x in list_of_urls:
-        wget.download(x, out=output_directory)
-
-# clears list contents
-list_of_urls.clear
-
-# sets output directory for google drive
-drive_link = "googledrive.com"
-
-# defines function to send delayed email with link to output directory on google drive.
-# function has delay in order to allow suffcient time for file upload
-def email_wait():
-        print("waiting")
-        time.sleep(15)
-        conn.sendmail('example@gmail.com', 'example@live.co.uk', 'Subject: New Unplash iPhone wallpapers ' + str(drive_link))
-        print("email sent")
-
+# sets outgoing email server
+conn = smtplib.SMTP('smtp.gmail.com', 587)
 
 # email template with sending and receiving addresses
-message = """From: Test Email Address <tempdata590@gmail.com>
+message = """From: Test Email Address <example@gmail.com>
 To: Callum <example@live.co.uk>
 MIME-Version: 1.0
 Content-type: text/html
 Subject: SMTP e-mail test
 
-<b>This is a test e-mail message<b>.
+<h2 style="color: #4e84db>This is a test e-mail message</h2>.
 """
 
-# defines function to upload file to wetransfer then send email
+# starts connect without outgoing email server
+def email_connection():
+    conn.ehlo()
+    conn.starttls()
+    conn.login('example@gmail.com', 'password')
+
+# finds top download links from webpage and
+# puts them in a list
+def scrape():
+    for link in soup.find_all('a', attrs={'title': 'Download photo'}):
+        list_of_urls.append(link.get('href'))
+        print(list_of_urls)
+
+# downloads images from urls in list_of_urls then
+# clears list contents
+def download():
+    for x in list_of_urls:
+        wget.download(x, out=output_directory)
+    print("Download complete")
+    list_of_urls.clear
+
+# creates .zip file containing downloaded images
+def compress_downloads():
+    print("Compressing downloads")
+    shutil.make_archive("C:/Users/Callum/Desktop/test/downloads", 'zip', root_dir=None, base_dir=None)
+    print("Compression complete")
+
+# uploads file to wetransfer then send email
 # from template containing wetransfer link
 def upload_wetran():
-        print("wetransfer function called")
-        # upload_link = x.upload_file(file1, "test")
-        upload_link = x.upload_file("C:/Users/Callum/Desktop/test/andrew-pons-57133-unsplash.jpg", "test")
-        print("wetransfer complete")
-        time.sleep(5)
-        conn.sendmail('example@gmail.com', 'example@live.co.uk', message + ("\n") + str(upload_link))
-        print(upload_link)
+    print("WeTransfer function called")
+    upload_link = x.upload_file("C:/Users/Callum/Desktop/test/downloads.zip", "test")
+    print("WeTransfer complete")
+    conn.sendmail('example@gmail.com', 'example@live.co.uk', message + str(upload_link))
+    print(upload_link)
+    conn.quit()
 
-# calls functions in order
+email_connection()
+scrape()
+download()
+compress_downloads()
 upload_wetran()
-# email_wait()
-conn.quit()
-file1.clear
+print("Wallpapers downloaded and transferred succesfully")
